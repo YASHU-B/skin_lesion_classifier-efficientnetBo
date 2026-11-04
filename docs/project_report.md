@@ -1,13 +1,33 @@
-# PROJECT DISSERTATION
+# MAJOR PROJECT DISSERTATION
 
-## LEAKAGE-AWARE, CLASS-BALANCED, AND EXPLAINABLE EFFICIENTNET-B0-CBAM FRAMEWORK FOR MULTI-CLASS SKIN LESION CLASSIFICATION
+## AN ATTENTION-ENHANCED AND EXPLAINABLE DEEP LEARNING FRAMEWORK FOR IMBALANCED SKIN LESION CLASSIFICATION
 
 ---
 
-**A Project Report Submitted in Partial Fulfillment of the Requirements for the Degree of**  
-**BACHELOR OF TECHNOLOGY / MASTER OF TECHNOLOGY**  
+**A Major Project Report Submitted in Partial Fulfillment of the Requirements for the Award of the Degree of**  
+**BACHELOR OF TECHNOLOGY**  
 **in**  
-**COMPUTER SCIENCE AND ENGINEERING / ARTIFICIAL INTELLIGENCE**
+**COMPUTER SCIENCE AND ARTIFICIAL INTELLIGENCE (CAI)**
+
+**Submitted by Team Members:**  
+1. **B. YASWANTH** (`23F61A3153`) — *Project Team Leader*  
+2. **G. MOUNISHA** (`23F61A3121`)  
+3. **MAGARALA ROHITH** (`23F61A3132`)  
+4. **RAGHUPRASAD GARI DARSHANKUMAR** (`24F65A3101`)  
+5. **E. THARUN KUMAR REDDY** (`23F61A3144`)  
+6. **SHAIK JAHEER** (`24F65A3104`)  
+
+**Under the Guidance of:**  
+**Faculty Guide / Internal Supervisor Name**  
+*Designation, Department of CAI*
+
+---
+
+### DEPARTMENT OF COMPUTER SCIENCE AND ARTIFICIAL INTELLIGENCE (CAI)
+### SIDDHARTH INSTITUTE OF ENGINEERING AND TECHNOLOGY (AUTONOMOUS)
+*(Approved by AICTE, New Delhi & Affiliated to JNTUA, Ananthapuramu)*  
+**Siddharth Nagar, Narayanavanam Road, Puttur - 517583, Andhra Pradesh, India**  
+**Academic Year: 2025 – 2026**
 
 ---
 

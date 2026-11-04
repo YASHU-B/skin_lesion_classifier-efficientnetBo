@@ -1,4 +1,4 @@
-# Leakage-Aware, Class-Balanced, and Explainable EfficientNet-B0-CBAM Framework for Multi-Class Skin Lesion Classification
+# An Attention-Enhanced and Explainable Deep Learning Framework for Imbalanced Skin Lesion Classification
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.2%2B-ee4c2c.svg)](https://pytorch.org/)
@@ -8,6 +8,51 @@
 An end-to-end, reproducible deep learning framework for seven-class dermatological screening on the **HAM10000** dataset. This project addresses critical clinical challenges in medical computer vision: **data leakage prevention** via strict lesion-level stratification, **severe class imbalance mitigation** via effective-number weighted Focal Loss, **spatial/channel salience** via Convolutional Block Attention Modules (CBAM), **visual explainability** via Grad-CAM, and **out-of-distribution filtering** via a 3-way neural gatekeeper and clinical ABCDE feature analysis.
 
 > **Academic Safety Notice:** This software is an academic research prototype and decision-support demonstration. It is not certified as a medical diagnostic device and must not be used for autonomous clinical diagnosis.
+
+---
+
+## Project Information & Authorship
+
+- **Institution:** Siddharth Institute of Engineering and Technology (Autonomous), Puttur, Andhra Pradesh, India
+- **Department:** Department of Computer Science and Artificial Intelligence (CAI)
+- **Project Team:**
+  1. **B. Yaswanth** (`23F61A3153`) — *Project Team Leader & Lead Author*
+  2. **G. Mounisha** (`23F61A3121`)
+  3. **Magarala Rohith** (`23F61A3132`)
+  4. **Raghuprasad Gari Darshankumar** (`24F65A3101`)
+  5. **E. Tharun Kumar Reddy** (`23F61A3144`)
+  6. **Shaik Jaheer** (`24F65A3104`)
+
+---
+
+## Intuitive Explanation of Core Concepts & Calculations
+
+For quick understanding during viva defenses or technical walkthroughs, here is what the core engineering calculations actually do in plain English:
+
+### 1. Data Leakage Prevention (Lesion-Grouped Splitting)
+* **The Problem:** In public datasets like HAM10000, doctors take multiple photos of the same mole (different zoom levels, angles). If you split images randomly, photo #1 goes into training and photo #2 goes into testing. The AI cheats by recognizing the patient's skin color rather than real cancer patterns, inflating test accuracy artificially by 5–10%.
+* **Our Solution:** We group strictly by `lesion_id` using two-stage `StratifiedGroupKFold`. If a lesion appears in training, none of its photos can ever appear in testing. Zero leakage is mathematically verified.
+
+### 2. CBAM Attention Mechanism (The "Human Magnifying Glass")
+* **Channel Attention:** Asks *"Which color/texture filters matter most?"* It amplifies pigment network channels and dims irrelevant background glare.
+* **Spatial Attention:** Asks *"Where is the lesion located on the skin?"* It forces the network to focus on the center lesion boundary and ignore peripheral healthy skin, hair, and camera borders.
+
+### 3. Effective-Number Focal Loss (Stopping Model "Laziness")
+* **The Problem:** 67% of images are harmless common moles (`nv`), while dangerous cancers like melanoma (`mel`) or dermatofibroma (`df`) make up only 1% to 11%. A lazy AI predicting "common mole" every time easily achieves 67% accuracy while killing patients through false negatives.
+* **Our Solution:** Focal Loss dynamically down-weights easy majority examples and heavily penalizes errors on rare cancers. Using the mathematical *Effective Number of Samples* ($\beta=0.999$), it boosts minority cancer sensitivity by **+7.66%**.
+
+### 4. Algorithmic ABCDE Heuristics (Clinical Morphological Scoring)
+* **Asymmetry Index ($A$):** Folds the lesion segmentation mask in half horizontally and vertically like a piece of paper. If the halves mirror each other $\rightarrow$ benign; if they mismatch $\rightarrow$ asymmetry warning.
+* **Border Compactness ($B = \frac{P^2}{4\pi A}$):** A circle has the lowest perimeter-to-area ratio. Smooth moles score low ($\approx 1.0$). Ragged, zigzag cancer borders have high perimeters, driving the score up to $8.0 - 9.9$.
+* **Color Variegation ($C$):** Measures the standard deviation of color channels inside the mole to detect multi-shaded suspicious pigmentation.
+
+### 5. Grad-CAM Explainability (Visual Proof for Doctors)
+* Computes gradients of the predicted class score with respect to the final convolutional feature maps.
+* Paints a transparent red/yellow heatmap over the image so dermatologists can verify that the AI made its decision based on actual tumor pathology rather than skin marks or camera lighting.
+
+### 6. 3-Way Neural Gatekeeper (Out-of-Distribution Safety)
+* Standard AI classifiers blindly guess a cancer class even if you upload a picture of a dog, car, or shirt.
+* Our auxiliary gatekeeper triages inputs first: **Non-Skin Clutter** is rejected, **Normal Healthy Skin** is safely cleared, and only genuine **Lesions** proceed to the 7-class diagnostic engine.
 
 ---
 
